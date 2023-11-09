@@ -1,0 +1,1 @@
+package ru.otus.otuskotlin.real.estate.advertisements.blackbox

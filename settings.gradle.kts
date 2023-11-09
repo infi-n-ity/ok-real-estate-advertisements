@@ -10,3 +10,5 @@ pluginManagement {
 //include("m1l1-hello")
 //include("m1l3-oop")
 //include("m1l4-dsl")
+
+include("ok-real-estate-advertisements-acceptance")

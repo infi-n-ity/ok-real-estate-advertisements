@@ -24,15 +24,12 @@ Real estate advertisements - это площадка, на которой пол
    1. [Схема инфраструктуры](./docs/02-devops/01-infrastruture.md)
    2. [Схема мониторинга](./docs/02-devops/02-monitoring.md)
 
-[//]: # (3. Тесты)
+3. Приемочные тесты - [ok-real-estate-advertisements-acceptance](ok-real-estate-advertisements-acceptance)
 
-[//]: # (4. Архитектура)
-
-[//]: # (    1. [Компонентная схема]&#40;./docs/04-architecture/01-arch.md&#41;)
-
-[//]: # (    2. [Интеграционная схема]&#40;./docs/04-architecture/02-integration.md&#41;)
-
-[//]: # (    3. [Описание API]&#40;./docs/04-architecture/03-api.md&#41;)
+4. Архитектура
+   1. [Компонентная схема](./docs/04-architecture/01-arch.md)
+   2. [Интеграционная схема](./docs/04-architecture/02-integration.md)
+   3. [Описание API](./docs/04-architecture/03-api.md)
 
 
 # Структура проекта
