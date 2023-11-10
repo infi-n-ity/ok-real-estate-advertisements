@@ -34,6 +34,14 @@ Real estate advertisements - это площадка, на которой пол
 
 # Структура проекта
 
+1. Транспортные модели и мапперы
+   1. [specs](specs) - спецификации openapi
+   2. [ok-real-estate-advertisements-api-v1-jackson](ok-real-estate-advertisements-api-v1-jackson) Версия 1, используется jackson
+   3. [ok-real-estate-advertisements-mappers-v1](ok-real-estate-advertisements-mappers-v1) Мапперы из транспортных моделей v1 во внутренние модели
+
+2. [ok-real-estate-advertisements-common](ok-real-estate-advertisements-common) Внутренние модели, общие хелперы и интерфейсы
+
+
 ## Подпроекты для занятий по языку Kotlin
 
 1. [m1l1-hello](m1l1-hello) - Вводное занятие, создание первой программы на Kotlin

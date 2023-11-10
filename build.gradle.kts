@@ -11,7 +11,7 @@ allprojects {
 }
 
 subprojects {
-    group = "ok-real-estate-advertisements.infi-n-ity.github.com"
+    group = "ok.real.estate.advertisements"
     version = "1.0-SNAPSHOT"
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
