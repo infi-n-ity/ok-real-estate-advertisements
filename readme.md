@@ -39,7 +39,13 @@ Real estate advertisements - это площадка, на которой пол
    2. [ok-real-estate-advertisements-api-v1-jackson](ok-real-estate-advertisements-api-v1-jackson) Версия 1, используется jackson
    3. [ok-real-estate-advertisements-mappers-v1](ok-real-estate-advertisements-mappers-v1) Мапперы из транспортных моделей v1 во внутренние модели
 
-2. [ok-real-estate-advertisements-common](ok-real-estate-advertisements-common) Внутренние модели, общие хелперы и интерфейсы
+2. Бизнес-логика и внутренние модели 
+   1. [ok-real-estate-advertisements-common](ok-real-estate-advertisements-common) Внутренние модели, общие хелперы и интерфейсы
+   2. [ok-real-estate-advertisements-stubs](ok-marketplace-stubs) Стабы
+
+3. Приложения (точки входа)
+   1. [ok-real-estate-advertisements-app-common](ok-marketplace-app-common) Общий код для приложений
+   2. [ok-real-estate-advertisements-app-spring](ok-marketplace-app-spring) Spring
 
 
 ## Подпроекты для занятий по языку Kotlin
