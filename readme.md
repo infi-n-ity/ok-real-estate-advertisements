@@ -41,11 +41,12 @@ Real estate advertisements - это площадка, на которой пол
 
 2. Бизнес-логика и внутренние модели 
    1. [ok-real-estate-advertisements-common](ok-real-estate-advertisements-common) Внутренние модели, общие хелперы и интерфейсы
-   2. [ok-real-estate-advertisements-stubs](ok-marketplace-stubs) Стабы
+   2. [ok-real-estate-advertisements-stubs](ok-real-estate-advertisements-stubs) Стабы
 
 3. Приложения (точки входа)
-   1. [ok-real-estate-advertisements-app-common](ok-marketplace-app-common) Общий код для приложений
-   2. [ok-real-estate-advertisements-app-spring](ok-marketplace-app-spring) Spring
+   1. [ok-real-estate-advertisements-app-common](ok-real-estate-advertisements-app-common) Общий код для приложений
+   2. [ok-real-estate-advertisements-app-spring](ok-real-estate-advertisements-app-spring) Spring
+   3. [ok-real-estate-advertisements-app-kafka](ok-real-estate-advertisements-app-kafka) Kafka
 
 
 ## Подпроекты для занятий по языку Kotlin
