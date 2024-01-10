@@ -20,6 +20,7 @@ kotlin {
 
                 implementation(project(":ok-real-estate-advertisements-common"))
                 implementation(project(":ok-real-estate-advertisements-stubs"))
+                implementation(project(":ok-real-estate-advertisements-lib-cor"))
             }
         }
         @Suppress("UNUSED_VARIABLE")

@@ -11,4 +11,8 @@ data class MkplAd(
     var visibility: MkplVisibility = MkplVisibility.NONE,
     var productId: MkplProductId = MkplProductId.NONE,
     val permissionsClient: MutableSet<MkplAdPermissionClient> = mutableSetOf()
-)
+) {
+    fun deepCopy(): MkplAd = copy(
+        permissionsClient = permissionsClient.toMutableSet(),
+    )
+}

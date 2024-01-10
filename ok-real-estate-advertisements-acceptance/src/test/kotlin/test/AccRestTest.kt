@@ -1,5 +1,6 @@
 package ru.otus.otuskotlin.real.estate.advertisements.blackbox.test
 
+import docker.SpringDockerCompose
 import fixture.client.RestClient
 import io.kotest.core.annotation.Ignored
 import ru.otus.otuskotlin.real.estate.advertisements.blackbox.docker.WiremockDockerCompose
@@ -12,6 +13,5 @@ open class AccRestTestBase(dockerCompose: DockerCompose) : BaseFunSpec(dockerCom
 
     testApiV1(client)
 })
-class AccRestWiremockTest : AccRestTestBase(WiremockDockerCompose)
-// TODO class AccRestSpringTest : AccRestTestBase(SpringDockerCompose)
+class AccRestSpringTest : AccRestTestBase(SpringDockerCompose)
 // TODO class AccRestKtorTest : AccRestTestBase(KtorDockerCompose)

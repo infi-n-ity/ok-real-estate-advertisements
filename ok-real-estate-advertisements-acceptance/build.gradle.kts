@@ -26,17 +26,11 @@ dependencies {
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-okhttp:$ktorVersion")
     testImplementation("io.ktor:ktor-client-okhttp-jvm:$ktorVersion")
+    testImplementation(project(mapOf("path" to ":ok-real-estate-advertisements-api-v1-jackson")))
 }
 
 tasks {
     withType<Test>().configureEach {
-        useJUnitPlatform()
-    }
-    test {
-        systemProperty("kotest.framework.test.severity", "NORMAL")
-    }
-    create<Test>("test-strict") {
-        systemProperty("kotest.framework.test.severity", "MINOR")
-        group = "verification"
+        dependsOn(":ok-marketplace-app-spring:dockerBuildImage")
     }
 }
