@@ -31,6 +31,5 @@ dependencies {
 
 tasks {
     withType<Test>().configureEach {
-        dependsOn(":ok-marketplace-app-spring:dockerBuildImage")
     }
 }
