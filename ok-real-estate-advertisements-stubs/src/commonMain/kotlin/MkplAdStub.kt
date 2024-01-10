@@ -50,7 +50,6 @@ object MkplAdStub {
 
     private fun mkplAd(base: MkplAd, id: String, filter: String, status: MkplStatus) = base.copy(
         id = MkplAdId(id),
-        realEstateType = MkplRealEstateType.valueOf("$filter"),
         realEstateYear = "year $filter $id",
         realEstateArea = "area $filter $id",
         description = "desc $filter $id",

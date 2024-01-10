@@ -1,9 +1,8 @@
 package ru.otus.otuskotlin.real.estate.advertisements.blackbox.test
 
-import docker.SpringDockerCompose
 import fixture.client.RestClient
 import io.kotest.core.annotation.Ignored
-import ru.otus.otuskotlin.real.estate.advertisements.blackbox.docker.WiremockDockerCompose
+import ru.otus.otuskotlin.real.estate.advertisements.blackbox.docker.SpringDockerCompose
 import ru.otus.otuskotlin.real.estate.advertisements.blackbox.fixture.BaseFunSpec
 import ru.otus.otuskotlin.real.estate.advertisements.blackbox.fixture.docker.DockerCompose
 

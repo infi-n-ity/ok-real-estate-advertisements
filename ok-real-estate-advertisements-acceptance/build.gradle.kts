@@ -10,7 +10,9 @@ dependencies {
     val logbackVersion: String by project
     val kotlinLoggingJvmVersion: String by project
 
-    testImplementation(kotlin("stdlib"))
+    implementation(kotlin("stdlib"))
+
+    implementation(project(":ok-real-estate-advertisements-api-v1-jackson"))
 
     testImplementation("ch.qos.logback:logback-classic:$logbackVersion")
     testImplementation("io.github.microutils:kotlin-logging-jvm:$kotlinLoggingJvmVersion")
@@ -26,10 +28,13 @@ dependencies {
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-okhttp:$ktorVersion")
     testImplementation("io.ktor:ktor-client-okhttp-jvm:$ktorVersion")
-    testImplementation(project(mapOf("path" to ":ok-real-estate-advertisements-api-v1-jackson")))
 }
+
+var severity: String = "MINOR"
 
 tasks {
     withType<Test>().configureEach {
+        useJUnitPlatform()
+        dependsOn(":ok-real-estate-advertisements-app-spring:dockerBuildImage")
     }
 }
