@@ -13,6 +13,7 @@ fun ICorChainDsl<MkplContext>.stubUpdateSuccess(title: String) = worker {
     handle {
         state = MkplState.FINISHING
         val stub = MkplAdStub.prepareResult {
+            adRequest.id.takeIf { it != MkplAdId.NONE }?.also { this.id = it }
             adRequest.realEstateType.takeIf { it != MkplRealEstateType.NONE }?.also { this.realEstateType = it }
             adRequest.realEstateArea.takeIf { it.isNotBlank() }?.also { this.realEstateArea = it }
             adRequest.realEstateYear.takeIf { it.isNotBlank() }?.also { this.realEstateYear = it }
