@@ -42,6 +42,7 @@ Real estate advertisements - это площадка, на которой пол
 2. Бизнес-логика и внутренние модели 
    1. [ok-real-estate-advertisements-common](ok-real-estate-advertisements-common) Внутренние модели, общие хелперы и интерфейсы
    2. [ok-real-estate-advertisements-stubs](ok-real-estate-advertisements-stubs) Стабы
+   3. [ok-marketplace-lib-cor](ok-real-estate-advertisements-lib-cor) Библиотека для построения бизнес-логики
 
 3. Приложения (точки входа)
    1. [ok-real-estate-advertisements-app-common](ok-real-estate-advertisements-app-common) Общий код для приложений

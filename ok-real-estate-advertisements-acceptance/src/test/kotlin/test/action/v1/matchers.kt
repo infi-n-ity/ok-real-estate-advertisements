@@ -2,12 +2,42 @@ package ru.otus.otuskotlin.real.estate.advertisements.blackbox.test.action.v1
 
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
+import io.kotest.matchers.and
+import ok.real.estate.advertisements.api.v1.models.*
 
-
-val haveNoErrors = Matcher<String> {
+fun haveResult(result: ResponseResult) = Matcher<IResponse> {
     MatcherResult(
-        it.contains("""{"result":"SUCCESS"}"""),
-        { "result should be success" },
-        { "result should not be success" }
+        it.result == result,
+        { "actual result ${it.result} but we expected $result" },
+        { "result should not be $result" }
     )
 }
+
+val haveNoErrors = Matcher<IResponse> {
+    MatcherResult(
+        it.errors.isNullOrEmpty(),
+        { "actual errors ${it.errors} but we expected no errors" },
+        { "errors should not be empty" }
+    )
+}
+
+fun haveError(code: String) = haveResult(ResponseResult.ERROR)
+    .and(Matcher<IResponse> {
+        MatcherResult(
+            it.errors?.firstOrNull { e -> e.code == code } != null,
+            { "actual errors ${it.errors} but we expected error with code $code" },
+            { "errors should not contain $code" }
+        )
+    })
+
+val haveSuccessResult = haveResult(ResponseResult.SUCCESS) and haveNoErrors
+
+val IResponse.ad: AdResponseObject?
+    get() = when (this) {
+        is AdCreateResponse -> ad
+        is AdReadResponse -> ad
+        is AdUpdateResponse -> ad
+        is AdDeleteResponse -> ad
+        is AdOffersResponse -> ad
+        else -> throw IllegalArgumentException("Invalid response type: ${this::class}")
+    }

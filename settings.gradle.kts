@@ -40,6 +40,7 @@ include("ok-real-estate-advertisements-mappers-v1")
 
 include("ok-real-estate-advertisements-stubs")
 
+include("ok-real-estate-advertisements-lib-cor")
 include("ok-real-estate-advertisements-biz")
 
 include("ok-real-estate-advertisements-app-spring")

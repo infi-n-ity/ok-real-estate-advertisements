@@ -1,14 +1,26 @@
 package ok.real.estate.advertisements.stubs
 
-import ok.real.estate.advertisements.common.models.MkplAd
-import ok.real.estate.advertisements.common.models.MkplAdId
-import ok.real.estate.advertisements.common.models.MkplRealEstateType
-import ok.real.estate.advertisements.common.models.MkplStatus
-import ok.real.estate.advertisements.stubs.MkplAdStubFlats.AD_ACTIVE_FLAT1
-import ok.real.estate.advertisements.stubs.MkplAdStubFlats.AD_SOLD_FLAT1
+import ok.real.estate.advertisements.common.models.*
 
 object MkplAdStub {
-    fun get(): MkplAd = AD_ACTIVE_FLAT1.copy()
+    fun get() = MkplAd(
+        id = MkplAdId("666"),
+        realEstateType = MkplRealEstateType.FLAT,
+        realEstateYear = "2018",
+        realEstateArea = "82",
+        description = "Продается квартира на левом берегу г. Астаны",
+        ownerId = MkplUserId("user-1"),
+        adStatus = MkplStatus.ACTIVE,
+        visibility = MkplVisibility.VISIBLE_PUBLIC,
+        permissionsClient = mutableSetOf(
+            MkplAdPermissionClient.READ,
+            MkplAdPermissionClient.UPDATE,
+            MkplAdPermissionClient.DELETE,
+            MkplAdPermissionClient.MAKE_VISIBLE_PUBLIC,
+            MkplAdPermissionClient.MAKE_VISIBLE_GROUP,
+            MkplAdPermissionClient.MAKE_VISIBLE_OWNER,
+        )
+    )
 
     fun prepareResult(block: MkplAd.() -> Unit): MkplAd = get().apply(block)
 
@@ -31,14 +43,13 @@ object MkplAdStub {
     )
 
     private fun mkplAdDemand(id: String, filter: String, type: MkplStatus) =
-        mkplAd(AD_ACTIVE_FLAT1, id = id, filter = filter, status = type)
+        mkplAd(get(), id = id, filter = filter, status = type)
 
     private fun mkplAdSupply(id: String, filter: String, type: MkplStatus) =
-        mkplAd(AD_SOLD_FLAT1, id = id, filter = filter, status = type)
+        mkplAd(get(), id = id, filter = filter, status = type)
 
     private fun mkplAd(base: MkplAd, id: String, filter: String, status: MkplStatus) = base.copy(
         id = MkplAdId(id),
-        realEstateType = MkplRealEstateType.valueOf("$filter"),
         realEstateYear = "year $filter $id",
         realEstateArea = "area $filter $id",
         description = "desc $filter $id",
