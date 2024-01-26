@@ -33,6 +33,7 @@ dependencies {
     // repo
     implementation(project(":ok-real-estate-advertisements-repo-in-memory"))
     implementation(project(":ok-real-estate-advertisements-repo-stubs"))
+    implementation(project(":ok-real-estate-advertisements-repo-postgresql"))
 
     // v1 api
     implementation(project(":ok-real-estate-advertisements-api-v1-jackson"))
