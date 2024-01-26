@@ -1,22 +1,25 @@
-package ok.real.estate.advertisements.biz.validation
+package ok.real.estate.advertisements.biz.validation.validation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import ok.real.estate.advertisements.biz.MkplAdProcessor
 import ok.real.estate.advertisements.common.MkplContext
 import ok.real.estate.advertisements.common.models.*
+import ok.real.estate.advertisements.stubs.MkplAdStub
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
+private val stub = MkplAdStub.get()
+
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationIdCorrect(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationDescriptionCorrect(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = MkplAdId("123-234-abc-ABC"),
+            id = stub.id,
             realEstateType = MkplRealEstateType.FLAT,
             realEstateArea = "82",
             realEstateYear = "2018",
@@ -28,20 +31,21 @@ fun validationIdCorrect(command: MkplCommand, processor: MkplAdProcessor) = runT
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(MkplState.FAILING, ctx.state)
+    assertEquals("abc", ctx.adValidated.description)
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationIdTrim(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationDescriptionTrim(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = MkplAdId(" \n\t 123-234-abc-ABC \n\t "),
+            id = stub.id,
             realEstateType = MkplRealEstateType.FLAT,
             realEstateArea = "82",
             realEstateYear = "2018",
-            description = "abc",
+            description = " \n\tabc \n\t",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
         ),
@@ -49,20 +53,21 @@ fun validationIdTrim(command: MkplCommand, processor: MkplAdProcessor) = runTest
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(MkplState.FAILING, ctx.state)
+    assertEquals("abc", ctx.adValidated.description)
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationIdEmpty(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationDescriptionEmpty(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = MkplAdId(""),
+            id = stub.id,
             realEstateType = MkplRealEstateType.FLAT,
             realEstateArea = "82",
             realEstateYear = "2018",
-            description = "abc",
+            description = "",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
         ),
@@ -71,22 +76,22 @@ fun validationIdEmpty(command: MkplCommand, processor: MkplAdProcessor) = runTes
     assertEquals(1, ctx.errors.size)
     assertEquals(MkplState.FAILING, ctx.state)
     val error = ctx.errors.firstOrNull()
-    assertEquals("id", error?.field)
-    assertContains(error?.message ?: "", "id")
+    assertEquals("description", error?.field)
+    assertContains(error?.message ?: "", "description")
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationIdFormat(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationDescriptionSymbols(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = MkplAdId("!@#\$%^&*(),.{}"),
+            id = stub.id,
             realEstateType = MkplRealEstateType.FLAT,
             realEstateArea = "82",
             realEstateYear = "2018",
-            description = "abc",
+            description = "!@#$%^&*(),.{}",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
         ),
@@ -95,6 +100,6 @@ fun validationIdFormat(command: MkplCommand, processor: MkplAdProcessor) = runTe
     assertEquals(1, ctx.errors.size)
     assertEquals(MkplState.FAILING, ctx.state)
     val error = ctx.errors.firstOrNull()
-    assertEquals("id", error?.field)
-    assertContains(error?.message ?: "", "id")
+    assertEquals("description", error?.field)
+    assertContains(error?.message ?: "", "description")
 }

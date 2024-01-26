@@ -2,25 +2,25 @@ plugins {
     kotlin("multiplatform")
 }
 
+
+
 kotlin {
     jvm {}
+    linuxX64 {}
     macosX64 {}
     macosArm64 {}
-    linuxX64 {}
 
     sourceSets {
         val coroutinesVersion: String by project
 
-        all { languageSettings.optIn("kotlin.RequiresOptIn") }
-
         @Suppress("UNUSED_VARIABLE")
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-common"))
-
                 implementation(project(":ok-real-estate-advertisements-common"))
                 implementation(project(":ok-real-estate-advertisements-stubs"))
-                implementation(project(":ok-real-estate-advertisements-lib-cor"))
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+
             }
         }
         @Suppress("UNUSED_VARIABLE")
@@ -28,12 +28,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-
-                implementation(project(":ok-real-estate-advertisements-repo-stubs"))
                 implementation(project(":ok-real-estate-advertisements-repo-tests"))
-                implementation(project(":ok-real-estate-advertisements-repo-in-memory"))
-
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             }
         }
         @Suppress("UNUSED_VARIABLE")

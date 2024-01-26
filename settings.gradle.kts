@@ -46,3 +46,7 @@ include("ok-real-estate-advertisements-biz")
 include("ok-real-estate-advertisements-app-spring")
 
 include("ok-real-estate-advertisements-app-kafka")
+
+include("ok-real-estate-advertisements-repo-in-memory")
+include("ok-real-estate-advertisements-repo-stubs")
+include("ok-real-estate-advertisements-repo-tests")
