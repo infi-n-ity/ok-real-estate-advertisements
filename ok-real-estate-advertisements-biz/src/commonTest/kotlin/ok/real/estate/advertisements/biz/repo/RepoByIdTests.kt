@@ -1,4 +1,4 @@
-package repo
+package ok.real.estate.advertisements.biz.repo
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -54,6 +54,7 @@ fun repoNotFoundTest(command: MkplCommand) = runTest {
             description = "xyz",
             adStatus = MkplStatus.SOLD,
             visibility = MkplVisibility.VISIBLE_TO_GROUP,
+            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)

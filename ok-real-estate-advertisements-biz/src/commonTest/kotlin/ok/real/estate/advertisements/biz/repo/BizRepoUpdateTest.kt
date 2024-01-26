@@ -1,8 +1,8 @@
-package repo
+package ok.real.estate.advertisements.biz.repo
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import repo.repoNotFoundTest
+import ok.real.estate.advertisements.biz.repo.repoNotFoundTest
 import ok.real.estate.advertisements.backend.repo.tests.AdRepositoryMock
 import ok.real.estate.advertisements.biz.MkplAdProcessor
 import ok.real.estate.advertisements.common.MkplContext
@@ -66,6 +66,7 @@ class BizRepoUpdateTest {
             description = "xyz",
             adStatus = MkplStatus.SOLD,
             visibility = MkplVisibility.VISIBLE_TO_GROUP,
+            lock = MkplAdLock("123-234-abc-ABC"),
         )
         val ctx = MkplContext(
             command = command,

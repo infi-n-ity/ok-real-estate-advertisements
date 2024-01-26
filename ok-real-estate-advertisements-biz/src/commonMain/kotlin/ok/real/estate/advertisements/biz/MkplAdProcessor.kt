@@ -10,6 +10,7 @@ import ok.real.estate.advertisements.biz.workers.*
 import ok.real.estate.advertisements.common.MkplContext
 import ok.real.estate.advertisements.common.MkplCorSettings
 import ok.real.estate.advertisements.common.models.MkplAdId
+import ok.real.estate.advertisements.common.models.MkplAdLock
 import ok.real.estate.advertisements.common.models.MkplCommand
 import ok.real.estate.advertisements.common.models.MkplState
 import ok.real.estate.advertisements.cor.chain
@@ -90,10 +91,13 @@ class MkplAdProcessor(val settings: MkplCorSettings = MkplCorSettings()) {
                 validation {
                     worker("Копируем поля в adValidating") { adValidating = adRequest.deepCopy() }
                     worker("Очистка id") { adValidating.id = MkplAdId(adValidating.id.asString().trim()) }
+                    worker("Очистка lock") { adValidating.lock = MkplAdLock(adValidating.lock.asString().trim()) }
                     worker("Очистка заголовка") { adValidating.realEstateYear = adValidating.realEstateYear.trim() }
                     worker("Очистка описания") { adValidating.description = adValidating.description.trim() }
                     validateIdNotEmpty("Проверка на непустой id")
                     validateIdProperFormat("Проверка формата id")
+                    validateLockNotEmpty("Проверка на непустой lock")
+                    validateLockProperFormat("Проверка формата lock")
                     validateRealEstateAreaHasOnlyDigit("Проверка на правописание года")
                     validateDescriptionNotEmpty("Проверка на непустое описание")
                     validateDescriptionHasContent("Проверка на наличие содержания в описании")
@@ -119,8 +123,11 @@ class MkplAdProcessor(val settings: MkplCorSettings = MkplCorSettings()) {
                     worker("Копируем поля в adValidating") {
                         adValidating = adRequest.deepCopy() }
                     worker("Очистка id") { adValidating.id = MkplAdId(adValidating.id.asString().trim()) }
+                    worker("Очистка lock") { adValidating.lock = MkplAdLock(adValidating.lock.asString().trim()) }
                     validateIdNotEmpty("Проверка на непустой id")
                     validateIdProperFormat("Проверка формата id")
+                    validateLockNotEmpty("Проверка на непустой lock")
+                    validateLockProperFormat("Проверка формата lock")
                     finishAdValidation("Успешное завершение процедуры валидации")
                 }
                 chain {

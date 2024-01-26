@@ -1,105 +1,104 @@
-package ok.real.estate.advertisements.biz.validation.validation
+package validation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import ok.real.estate.advertisements.biz.MkplAdProcessor
 import ok.real.estate.advertisements.common.MkplContext
 import ok.real.estate.advertisements.common.models.*
-import ok.real.estate.advertisements.stubs.MkplAdStub
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-private val stub = MkplAdStub.get()
-
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationDescriptionCorrect(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationLockCorrect(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = stub.id,
+            id = MkplAdId("123-234-abc-ABC"),
             realEstateType = MkplRealEstateType.FLAT,
-            realEstateArea = "82",
             realEstateYear = "2018",
+            realEstateArea = "81",
             description = "abc",
-            adStatus = MkplStatus.ACTIVE,
+            adStatus = MkplStatus.SOLD,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(MkplState.FAILING, ctx.state)
-    assertEquals("abc", ctx.adValidated.description)
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationDescriptionTrim(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationLockTrim(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = stub.id,
+            id = MkplAdId("123-234-abc-ABC"),
             realEstateType = MkplRealEstateType.FLAT,
-            realEstateArea = "82",
             realEstateYear = "2018",
-            description = " \n\tabc \n\t",
-            adStatus = MkplStatus.ACTIVE,
+            realEstateArea = "81",
+            description = "abc",
+            adStatus = MkplStatus.SOLD,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock(" \n\t 123-234-abc-ABC \n\t "),
         ),
     )
     processor.exec(ctx)
     assertEquals(0, ctx.errors.size)
     assertNotEquals(MkplState.FAILING, ctx.state)
-    assertEquals("abc", ctx.adValidated.description)
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationDescriptionEmpty(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationLockEmpty(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = stub.id,
+            id = MkplAdId("123-234-abc-ABC"),
             realEstateType = MkplRealEstateType.FLAT,
-            realEstateArea = "82",
             realEstateYear = "2018",
-            description = "",
-            adStatus = MkplStatus.ACTIVE,
+            realEstateArea = "81",
+            description = "abc",
+            adStatus = MkplStatus.SOLD,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock(""),
         ),
     )
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
     assertEquals(MkplState.FAILING, ctx.state)
     val error = ctx.errors.firstOrNull()
-    assertEquals("description", error?.field)
-    assertContains(error?.message ?: "", "description")
+    assertEquals("lock", error?.field)
+    assertContains(error?.message ?: "", "id")
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun validationDescriptionSymbols(command: MkplCommand, processor: MkplAdProcessor) = runTest {
+fun validationLockFormat(command: MkplCommand, processor: MkplAdProcessor) = runTest {
     val ctx = MkplContext(
         command = command,
         state = MkplState.NONE,
         workMode = MkplWorkMode.TEST,
         adRequest = MkplAd(
-            id = stub.id,
+            id = MkplAdId("123-234-abc-ABC"),
             realEstateType = MkplRealEstateType.FLAT,
-            realEstateArea = "82",
             realEstateYear = "2018",
-            description = "!@#$%^&*(),.{}",
-            adStatus = MkplStatus.ACTIVE,
+            realEstateArea = "81",
+            description = "abc",
+            adStatus = MkplStatus.SOLD,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock("!@#\$%^&*(),.{}"),
         ),
     )
     processor.exec(ctx)
     assertEquals(1, ctx.errors.size)
     assertEquals(MkplState.FAILING, ctx.state)
     val error = ctx.errors.firstOrNull()
-    assertEquals("description", error?.field)
-    assertContains(error?.message ?: "", "description")
+    assertEquals("lock", error?.field)
+    assertContains(error?.message ?: "", "id")
 }

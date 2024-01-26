@@ -1,4 +1,4 @@
-package ok.real.estate.advertisements.biz.validation.validation
+package ok.real.estate.advertisements.biz.validation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ok.real.estate.advertisements.backend.repository.inmemory.AdRepoStub
@@ -12,12 +12,7 @@ import kotlin.test.Test
 class BizValidationCreateTest {
 
     private val command = MkplCommand.CREATE
-    private val settings by lazy {
-        MkplCorSettings(
-            repoTest = AdRepoStub()
-        )
-    }
-    private val processor by lazy { MkplAdProcessor(settings) }
+    private val processor = MkplAdProcessor(MkplCorSettings(repoTest = AdRepoStub()))
 
     @Test fun correctDescription() = validationDescriptionCorrect(command, processor)
     @Test fun trimDescription() = validationDescriptionTrim(command, processor)

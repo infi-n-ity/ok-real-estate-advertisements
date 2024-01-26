@@ -84,6 +84,7 @@ private fun MkplAd.toTransportAd(): AdResponseObject = AdResponseObject(
     adStatus = adStatus.toTransportAd(),
     visibility = visibility.toTransportAd(),
     permissions = permissionsClient.toTransportAd(),
+    lock = lock.takeIf { it != MkplAdLock.NONE }?.asString(),
 )
 
 private fun Set<MkplAdPermissionClient>.toTransportAd(): Set<AdPermissions>? = this

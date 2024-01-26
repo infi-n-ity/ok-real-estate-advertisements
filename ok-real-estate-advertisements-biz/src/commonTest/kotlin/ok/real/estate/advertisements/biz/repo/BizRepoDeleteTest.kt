@@ -1,8 +1,8 @@
-package repo
+package ok.real.estate.advertisements.biz.repo
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import repo.repoNotFoundTest
+import ok.real.estate.advertisements.biz.repo.repoNotFoundTest
 import ok.real.estate.advertisements.backend.repo.tests.AdRepositoryMock
 import ok.real.estate.advertisements.biz.MkplAdProcessor
 import ok.real.estate.advertisements.common.MkplContext
@@ -27,6 +27,7 @@ class BizRepoDeleteTest {
         ownerId = userId,
         adStatus = MkplStatus.SOLD,
         visibility = MkplVisibility.VISIBLE_PUBLIC,
+        lock = MkplAdLock("123-234-abc-ABC"),
     )
     private val repo by lazy {
         AdRepositoryMock(
@@ -57,6 +58,7 @@ class BizRepoDeleteTest {
     fun repoDeleteSuccessTest() = runTest {
         val adToUpdate = MkplAd(
             id = MkplAdId("123"),
+            lock = MkplAdLock("123-234-abc-ABC"),
         )
         val ctx = MkplContext(
             command = command,

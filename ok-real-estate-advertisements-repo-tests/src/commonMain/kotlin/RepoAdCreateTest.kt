@@ -13,6 +13,8 @@ import kotlin.test.assertNotEquals
 abstract class RepoAdCreateTest {
     abstract val repo: IAdRepository
 
+    protected open val lockNew: MkplAdLock = MkplAdLock("20000000-0000-0000-0000-000000000002")
+
     private val createObj = MkplAd(
         realEstateType = MkplRealEstateType.FLAT,
         realEstateYear = "2018",
@@ -35,6 +37,7 @@ abstract class RepoAdCreateTest {
         assertEquals(expected.adStatus, result.data?.adStatus)
         assertNotEquals(MkplAdId.NONE, result.data?.id)
         assertEquals(emptyList(), result.errors)
+        assertEquals(lockNew, result.data?.lock)
     }
 
     companion object : BaseInitAds("create") {
