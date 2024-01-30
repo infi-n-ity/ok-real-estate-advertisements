@@ -29,7 +29,14 @@ kotlin {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
 
+                implementation(project(":ok-real-estate-advertisements-repo-stubs"))
+                implementation(project(":ok-real-estate-advertisements-repo-tests"))
+                implementation(project(":ok-real-estate-advertisements-repo-in-memory"))
+
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+
+                implementation(project(":ok-real-estate-advertisements-repo-tests"))
+                implementation(project(":ok-real-estate-advertisements-stubs"))
             }
         }
         @Suppress("UNUSED_VARIABLE")

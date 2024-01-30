@@ -26,6 +26,7 @@ fun validationDescriptionCorrect(command: MkplCommand, processor: MkplAdProcesso
             description = "abc",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
@@ -48,6 +49,7 @@ fun validationDescriptionTrim(command: MkplCommand, processor: MkplAdProcessor) 
             description = " \n\tabc \n\t",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
@@ -70,6 +72,7 @@ fun validationDescriptionEmpty(command: MkplCommand, processor: MkplAdProcessor)
             description = "",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)
@@ -94,6 +97,7 @@ fun validationDescriptionSymbols(command: MkplCommand, processor: MkplAdProcesso
             description = "!@#$%^&*(),.{}",
             adStatus = MkplStatus.ACTIVE,
             visibility = MkplVisibility.VISIBLE_PUBLIC,
+            lock = MkplAdLock("123-234-abc-ABC"),
         ),
     )
     processor.exec(ctx)

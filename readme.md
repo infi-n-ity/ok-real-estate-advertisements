@@ -49,6 +49,11 @@ Real estate advertisements - это площадка, на которой пол
    2. [ok-real-estate-advertisements-app-spring](ok-real-estate-advertisements-app-spring) Spring
    3. [ok-real-estate-advertisements-app-kafka](ok-real-estate-advertisements-app-kafka) Kafka
 
+4. Репозитарии
+   1. [ok-real-estate-advertisements-repo-in-memory](ok-real-estate-advertisements-repo-in-memory) Репозитарий в памяти
+   2. [ok-real-estate-advertisements-repo-stubs](ok-real-estate-advertisements-repo-stubs) Репозитарий-заглушка
+   3. [ok-real-estate-advertisements-repo-tests](ok-real-estate-advertisements-repo-tests) Проект с тестами для репозитариев
+   4. [ok-real-estate-advertisements-repo-postgresql](ok-real-estate-advertisements-repo-postgresql) Postgresql
 
 ## Подпроекты для занятий по языку Kotlin
 
